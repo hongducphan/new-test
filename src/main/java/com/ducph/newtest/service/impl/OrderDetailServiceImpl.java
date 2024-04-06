@@ -39,7 +39,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public OrderDetailDTO updateOrderById(OrderDetailDTO orderDetailDTO) {
         int orderDetailId = orderDetailDTO.getId();
-        log.info(this.getClass().getSimpleName() + ".[fetchById] id to update: {}", orderDetailId);
+        log.info(this.getClass().getSimpleName() + ".[updateOrderById] id to update: {}", orderDetailId);
         var orderDetail = orderDetailRepository.findById(orderDetailId)
                 .orElseThrow(() -> new NotFoundException("Not found :" + orderDetailId));
         orderDetail.setName(orderDetailDTO.getName());

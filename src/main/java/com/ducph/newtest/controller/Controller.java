@@ -24,7 +24,6 @@ public class Controller {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) {
-        log.info("[findById] - id={}", id);
         return ResponseEntity.ok(todoService.findById(id));
     }
 

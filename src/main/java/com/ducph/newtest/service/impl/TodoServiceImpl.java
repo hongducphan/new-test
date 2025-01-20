@@ -25,7 +25,6 @@ public class TodoServiceImpl implements TodoService {
     @Override
     @Cacheable(cacheNames = "todo", key = "#id")
     public Todo findById(int id) {
-        log.info("Fetching data from todo server with id - [{}]", id);
         return todoClient.findById(id);
     }
 

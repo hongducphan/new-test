@@ -21,11 +21,13 @@ spring:
       "org.quartz.jobStore.isClustered": true
       "org.quartz.scheduler.instanceId": AUTO
     overwrite-existing-jobs: true
-
-cache:
-  redis:
-    host: localhost
-    port: 6379
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ducph-group
 
 todo-service:
   base-url: https://dummyjson.com/todos
+
+server:
+  port: 7777

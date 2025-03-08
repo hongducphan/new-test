@@ -1,7 +1,6 @@
 package com.ducph.newtest.controller;
 
 import com.ducph.newtest.service.TodoService;
-import com.ducph.newtest.service.impl.TodoServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ public class Controller {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) {
-        log.info("[findById] - id={}", id);
         return ResponseEntity.ok(todoService.findById(id));
     }
 

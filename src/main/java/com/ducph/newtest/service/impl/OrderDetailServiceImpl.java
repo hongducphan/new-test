@@ -30,7 +30,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public OrderDetailDTO fetchById(int id) {
-        log.info(this.getClass().getSimpleName() + ".[fetchById] id: {}", id);
+        log.info("{}.[fetchById] id: {}", this.getClass().getSimpleName(), id);
         var orderDetail = orderDetailRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Not found :" + id));
         return objectMapper.convertValue(orderDetail, OrderDetailDTO.class);
@@ -39,7 +39,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public OrderDetailDTO updateOrderById(OrderDetailDTO orderDetailDTO) {
         int orderDetailId = orderDetailDTO.getId();
-        log.info(this.getClass().getSimpleName() + ".[fetchById] id to update: {}", orderDetailId);
+        log.info("{}.[updateOrderById] id to update: {}", this.getClass().getSimpleName(), orderDetailId);
         var orderDetail = orderDetailRepository.findById(orderDetailId)
                 .orElseThrow(() -> new NotFoundException("Not found :" + orderDetailId));
         orderDetail.setName(orderDetailDTO.getName());

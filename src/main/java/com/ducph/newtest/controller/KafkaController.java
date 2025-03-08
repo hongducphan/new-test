@@ -20,7 +20,12 @@ public class KafkaController {
 
     @PostMapping("/{message}")
     public ResponseEntity<?> publish(@PathVariable String message) {
-        kafkaTemplate.send("ducph", message);
+        kafkaTemplate.send("ducph", message)
+                .thenAccept(result -> log.info("Message sent successfully to partition {}", result.getRecordMetadata().partition()))
+                .exceptionallyAsync(error -> {
+                    log.error("Failed to send message: {}", error.getMessage());
+                    return null;
+                });
         return ResponseEntity.ok("Sent message: " + message);
     }
 

@@ -28,3 +28,6 @@ spring:
 
 todo-service:
   base-url: https://dummyjson.com/todos
+
+server:
+  port: 7777

@@ -2,8 +2,10 @@ package com.ducph.newtest.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class RedisDto {
+public class CacheDto implements Serializable {
 
     private String key;
     private String value;

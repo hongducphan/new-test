@@ -1,9 +1,9 @@
 package com.ducph.newtest.controller;
 
-import com.ducph.newtest.dto.RedisDto;
+import com.ducph.newtest.dto.CacheDto;
+import com.ducph.newtest.service.CacheService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/redis")
 @RequiredArgsConstructor
 @Slf4j
-public class RedisController {
+public class CacheController {
 
-    private final RedisTemplate<String, String> redisTemplate;
+    private final CacheService cacheService;
 
     @GetMapping("/{key}")
     public ResponseEntity<?> getByKey(@PathVariable String key) {
-        String value = redisTemplate.opsForValue().get(key);
+        String value = cacheService.get(key);
         return ResponseEntity.ok(value);
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody RedisDto data) {
-        redisTemplate.opsForValue().set(data.getKey(), data.getValue());
-        return ResponseEntity.ok("Create redis data with key: " + data.getKey());
+    public ResponseEntity<?> create(@RequestBody CacheDto data) {
+        var cacheData = cacheService.create(data);
+        return ResponseEntity.ok(cacheData);
     }
 
     @DeleteMapping("/{key}")
     public ResponseEntity<?> evictByKey(@PathVariable String key) {
-        String value = redisTemplate.opsForValue().getAndDelete(key);
-        return ResponseEntity.ok("Deleted redis data with key: " + value);
+        cacheService.evict(key);
+        return ResponseEntity.ok("Deleted redis data with key: " + key);
     }
 }

@@ -26,8 +26,12 @@ spring:
     consumer:
       group-id: ducph-group
 
-todo-service:
-  base-url: https://dummyjson.com/todos
-
 server:
   port: 7777
+
+vault:
+  host: localhost
+  port: 8200
+  scheme: http
+  token: "hvs.3YrtcAdo6IOYwoy5MQWEqQyo"
+  path: "secret/data/new-test"
